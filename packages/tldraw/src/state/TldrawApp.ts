@@ -975,6 +975,7 @@ export class TldrawApp extends StateManager<TDSnapshot> {
    */
   togglePresentationMode = (): this => {
     if (this.session) return this
+    this.selectNoneAllPages()
     this.patchState(
       {
         settings: {
@@ -2330,6 +2331,24 @@ export class TldrawApp extends StateManager<TDSnapshot> {
     return this
   }
 
+  selectNoneAllPages = (): this => {
+    Object.values(this.document.pages).forEach((page) => {
+      this.patchState(
+        {
+          document: {
+            pageStates: {
+              [page.id]: {
+                selectedIds: [],
+              },
+            },
+          },
+        },
+        `selected`
+      )
+    })
+    return this
+  }
+
   /* -------------------------------------------------- */
   /*                      Sessions                 p      */
   /* -------------------------------------------------- */
@@ -2340,7 +2359,7 @@ export class TldrawApp extends StateManager<TDSnapshot> {
    * @param args arguments of the session's start method.
    */
   startSession = <T extends SessionType>(type: T, ...args: SessionArgsOfType<T>): this => {
-    if (this.readOnly && type !== SessionType.Brush) return this
+    if (this.readOnly) return this
     if (this.session) {
       TLDR.warn(`Already in a session! (${this.session.constructor.name})`)
       this.cancelSession()
@@ -3255,6 +3274,7 @@ export class TldrawApp extends StateManager<TDSnapshot> {
   }
 
   onPointerDown: TLPointerEventHandler = (info, e) => {
+    if (this.readOnly) return
     if (e.buttons === 4) {
       this.isForcePanning = true
     } else if (this.isPointing) {
@@ -3268,6 +3288,7 @@ export class TldrawApp extends StateManager<TDSnapshot> {
   }
 
   onPointerUp: TLPointerEventHandler = (info, e) => {
+    if (this.readOnly) return
     this.isPointing = false
     if (!this.shiftKey) this.isForcePanning = false
     this.updateInputs(info, e)
@@ -3276,6 +3297,7 @@ export class TldrawApp extends StateManager<TDSnapshot> {
 
   // Canvas (background)
   onPointCanvas: TLCanvasEventHandler = (info, e) => {
+    if (this.readOnly) return
     this.updateInputs(info, e)
     this.currentTool.onPointCanvas?.(info, e)
   }
@@ -3302,6 +3324,7 @@ export class TldrawApp extends StateManager<TDSnapshot> {
 
   // Shape
   onPointShape: TLPointerEventHandler = (info, e) => {
+    if (this.readOnly) return
     this.originPoint = this.getPagePoint(info.point).concat(info.pressure)
     this.updateInputs(info, e)
     this.currentTool.onPointShape?.(info, e)
@@ -3341,6 +3364,7 @@ export class TldrawApp extends StateManager<TDSnapshot> {
 
   // Bounds (bounding box background)
   onPointBounds: TLBoundsEventHandler = (info, e) => {
+    if (this.readOnly) return
     this.originPoint = this.getPagePoint(info.point).concat(info.pressure)
     this.updateInputs(info, e)
     this.currentTool.onPointBounds?.(info, e)
@@ -3380,6 +3404,7 @@ export class TldrawApp extends StateManager<TDSnapshot> {
 
   // Bounds handles (corners, edges)
   onPointBoundsHandle: TLBoundsHandleEventHandler = (info, e) => {
+    if (this.readOnly) return
     this.originPoint = this.getPagePoint(info.point).concat(info.pressure)
     this.updateInputs(info, e)
     this.currentTool.onPointBoundsHandle?.(info, e)
@@ -3434,6 +3459,7 @@ export class TldrawApp extends StateManager<TDSnapshot> {
 
   // Handles (ie the handles of a selected arrow)
   onPointHandle: TLPointerEventHandler = (info, e) => {
+    if (this.readOnly) return
     this.originPoint = this.getPagePoint(info.point).concat(info.pressure)
     this.updateInputs(info, e)
     this.currentTool.onPointHandle?.(info, e)
