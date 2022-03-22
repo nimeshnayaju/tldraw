@@ -114,13 +114,17 @@ const StyledPanel = styled(Panel, {
   flexDirection: 'column',
   gap: '$3',
   width: DECK_WIDTH,
+
+  '@micro': {
+    width: 150,
+  },
 })
 
 const StyledSlideStripContainer = styled('div', {
   display: 'flex',
   flexDirection: 'column',
   gap: '$4',
-  maxHeight: '70vh',
+  maxHeight: '60vh',
 })
 
 const StyledAddSlide = styled('div', {

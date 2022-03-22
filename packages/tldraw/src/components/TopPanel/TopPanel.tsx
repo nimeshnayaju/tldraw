@@ -117,7 +117,7 @@ export const MobileOnly = styled('div', {
       small: {
         display: 'inherit',
       },
-      large: {
+      medium: {
         display: 'none',
       },
     },

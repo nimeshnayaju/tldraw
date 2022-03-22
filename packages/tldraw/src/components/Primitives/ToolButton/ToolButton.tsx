@@ -135,6 +135,11 @@ export const StyledToolButton = styled('button', {
     opacity: 0.618,
   },
 
+  '@micro': {
+    height: '30px',
+    width: '30px',
+  },
+
   variants: {
     variant: {
       primary: {
@@ -184,9 +189,21 @@ export const StyledToolButton = styled('button', {
     bp: {
       mobile: {},
       small: {},
+      micro: {},
     },
   },
   compoundVariants: [
+    {
+      variant: 'text',
+      bp: 'micro',
+      css: {
+        [`& ${StyledToolButtonInner}`]: {
+          fontSize: '$0',
+          padding: '0 $0',
+          gap: '$0',
+        },
+      },
+    },
     {
       variant: 'primary',
       bp: 'mobile',

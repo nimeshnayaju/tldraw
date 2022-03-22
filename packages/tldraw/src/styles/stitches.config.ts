@@ -74,10 +74,10 @@ const { styled, createTheme } = createStitches({
     transitions: {},
   },
   media: {
-    micro: '(max-width: 370px)',
+    micro: '(max-width: 500px)',
     sm: '(min-width: 640px)',
-    md: '(min-width: 768px)',
-    lg: '(min-width: 1024px)',
+    md: '(min-width: 1400px)',
+    lg: '(min-width: 1800px)',
   },
   utils: {
     zStrokeWidth: () => (value: number | number[]) => {
