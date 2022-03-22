@@ -6,13 +6,15 @@ import { TldrawApp, TDCallbacks } from '~state'
 import { TldrawContext, useStylesheet, useKeyboardShortcuts, useTldrawApp } from '~hooks'
 import { shapeUtils } from '~state/shapes'
 import { ToolsPanel } from '~components/ToolsPanel'
-import { TopPanel } from '~components/TopPanel'
+import { MobileOnly, TopPanel } from '~components/TopPanel'
 import { ContextMenu } from '~components/ContextMenu'
 import { FocusButton } from '~components/FocusButton'
 import { TLDR } from '~state/TLDR'
 import { GRID_SIZE } from '~constants'
 import { Loading } from '~components/Loading'
 import { Deck } from '~components/Deck'
+import { NavigationTools } from '~components/NavigationTools/NavigationTools'
+import { breakpoints } from '~components/breakpoints'
 
 export interface TldrawProps extends TDCallbacks {
   /**
@@ -510,6 +512,11 @@ const InnerTldraw = React.memo(function InnerTldraw({
           </StyledUI>
           {!settings.isFocusMode && !settings.isPresentationMode && settings.showDeck && (
             <Deck showPages={showPages} readOnly={readOnly} />
+          )}
+          {settings.isPresentationMode && (
+            <MobileOnly bp={breakpoints}>
+              <NavigationTools />
+            </MobileOnly>
           )}
         </>
       )}

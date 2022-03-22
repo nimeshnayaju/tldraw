@@ -2,7 +2,7 @@
   "name": "@tlslides/www",
   "version": "1.6.2",
   "private": true,
-  "description": "A tiny little drawing app (site).",
+  "description": "Create slides using tldraw.",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/nimeshnayaju/tlslides.git"

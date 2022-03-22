@@ -61,7 +61,17 @@ export function ReadOnlyEditor({ page, pageState }: ReadOnlyEditorProps) {
 
   return (
     <StyledContainer active={page.id === app.currentPageId}>
-      <StyledLayout tabIndex={-0} ref={rWrapper} onClick={handleOpenPage}>
+      <StyledLayout
+        tabIndex={-0}
+        ref={rWrapper}
+        onPointerDown={(e) => e.preventDefault}
+        onPointerUp={(e) => {
+          if (e.button === 0) {
+            e.preventDefault()
+            handleOpenPage()
+          }
+        }}
+      >
         <Renderer
           containerRef={rWrapper}
           shapeUtils={shapeUtils}

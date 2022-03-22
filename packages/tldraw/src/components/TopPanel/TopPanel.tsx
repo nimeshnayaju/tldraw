@@ -109,7 +109,7 @@ const StyledSpacer = styled('div', {
   pointerEvents: 'none',
 })
 
-const MobileOnly = styled('div', {
+export const MobileOnly = styled('div', {
   display: 'flex',
   flexDirection: 'row',
   variants: {
