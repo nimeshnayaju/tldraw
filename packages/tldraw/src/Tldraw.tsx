@@ -415,7 +415,6 @@ const InnerTldraw = React.memo(function InnerTldraw({
       <ContextMenu>
         <Renderer
           id={id}
-          containerRef={rWrapper}
           shapeUtils={shapeUtils}
           page={page}
           pageState={pageState}

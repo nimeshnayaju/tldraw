@@ -4,11 +4,10 @@ import type { TldrawApp } from '../../internal'
 
 export function duplicatePage(app: TldrawApp, pageId: string): TldrawCommand {
   const newId = Utils.uniqueId()
-  const {
-    currentPageId,
-    page,
-    pageState: { camera },
-  } = app
+  const { currentPageId } = app
+
+  const page = app.getPage(pageId)
+  const { camera } = app.getPageState(pageId)
 
   const nextPage = {
     ...page,
