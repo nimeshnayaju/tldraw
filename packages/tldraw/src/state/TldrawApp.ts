@@ -1383,6 +1383,7 @@ export class TldrawApp extends StateManager<TDSnapshot> {
         settings: {
           ...this.state.settings,
           isPresentationMode: false,
+          isFocusMode: false,
           showDeck: true,
         },
         document: migrate(document, TldrawApp.version),

@@ -20,12 +20,7 @@ const SLIDE_HEIGHT = 115
 const sortedSelector = (s: TDSnapshot) =>
   Object.values(s.document.pages).sort((a, b) => (a.childIndex || 0) - (b.childIndex || 0))
 
-interface DeckProps {
-  readOnly: boolean
-  showPages: boolean
-}
-
-export const Deck = React.memo(function Deck({ readOnly }: DeckProps): JSX.Element {
+export const Deck = React.memo(function Deck(): JSX.Element {
   const app = useTldrawApp()
 
   const handleCreatePage = React.useCallback(() => {
