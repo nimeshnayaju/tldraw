@@ -30,10 +30,11 @@ export const Panel = styled('div', {
         borderBottomRightRadius: '$1',
       },
       lr: {
-        padding: '$4',
         gap: '$3',
+        padding: '10px 0',
         borderTop: 0,
         borderLeft: 0,
+        borderBottom: 0,
         borderTopRightRadius: '$1',
         borderTopLeftRadius: '$3',
         borderBottomLeftRadius: '$3',

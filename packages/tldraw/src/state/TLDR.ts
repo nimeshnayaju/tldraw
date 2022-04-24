@@ -46,7 +46,7 @@ export class TLDR {
   }
 
   static getCameraZoom(zoom: number) {
-    return Utils.clamp(zoom, 0.5, 2)
+    return Utils.clamp(zoom, 0.1, 5)
   }
 
   static getPage(data: TDSnapshot, pageId: string): TDPage {

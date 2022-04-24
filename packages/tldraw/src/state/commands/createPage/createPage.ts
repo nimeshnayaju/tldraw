@@ -16,7 +16,7 @@ export function createPage(
   const nextChildIndex = topPage?.childIndex ? topPage?.childIndex + 1 : 1
 
   // TODO: Iterate the name better
-  const nextName = `New Slide`
+  const nextName = `Slide ${nextChildIndex}`
 
   const page: TDPage = {
     id: pageId,

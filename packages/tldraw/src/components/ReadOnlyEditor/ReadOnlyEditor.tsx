@@ -14,7 +14,6 @@ interface ReadOnlyEditorProps {
 
 export function ReadOnlyEditor({ page, pageState }: ReadOnlyEditorProps) {
   const app = useTldrawApp()
-  const rWrapper = React.useRef<HTMLDivElement>(null)
   const state = app.useStore()
 
   const { settings, appState } = state
@@ -60,48 +59,29 @@ export function ReadOnlyEditor({ page, pageState }: ReadOnlyEditorProps) {
   }, [app])
 
   return (
-    <StyledContainer active={page.id === app.currentPageId}>
-      <StyledLayout
-        tabIndex={-0}
-        ref={rWrapper}
-        onPointerDown={(e) => e.preventDefault}
-        onPointerUp={(e) => {
-          if (e.button === 0) {
-            e.preventDefault()
-            handleOpenPage()
-          }
-        }}
-      >
-        <Renderer
-          containerRef={rWrapper}
-          shapeUtils={shapeUtils}
-          page={page}
-          pageState={pageState}
-          theme={theme}
-          meta={meta}
-        />
-      </StyledLayout>
-    </StyledContainer>
+    <StyledLayout
+      tabIndex={-0}
+      onPointerDown={(e) => e.preventDefault}
+      onPointerUp={(e) => {
+        if (e.button === 0) {
+          e.preventDefault()
+          handleOpenPage()
+        }
+      }}
+    >
+      <Renderer
+        shapeUtils={shapeUtils}
+        page={page}
+        pageState={pageState}
+        theme={theme}
+        meta={meta}
+      />
+    </StyledLayout>
   )
 }
 
-const StyledContainer = styled('div', {
-  position: 'relative',
-  width: '100%',
-  height: 115,
-  overflow: 'hidden',
-  borderRadius: '$3',
-  variants: {
-    active: {
-      true: {
-        boxShadow: 'rgb(3 102 214 / 30%) 0px 0px 0px 2px',
-      },
-    },
-  },
-})
-
 const StyledLayout = styled('div', {
-  position: 'absolute',
+  position: 'relative',
   borderRadius: '$3',
   height: '100%',
   width: '100%',
@@ -120,6 +100,10 @@ const StyledLayout = styled('div', {
     height: '100%',
     width: '100%',
     zIndex: 1,
+  },
+
+  '& .tl-canvas': {
+    pointerEvents: 'none',
   },
 
   '& input, textarea, button, select, label, button': {
